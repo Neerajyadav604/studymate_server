@@ -8,16 +8,22 @@ dotenv.config();
 // This function is used as middleware to authenticate user requests
 exports.auth = async (req, res, next) => {
 	try {
+
+		console.log("##############3333333333#####################")
 		// Extracting JWT from request cookies, body or header
 		const token =
-			req.cookies.token ||
-			req.body.token ||
-			req.header("Authorization").replace("Bearer ", "");
-
+  req.cookies?.token ||
+  req.body?.token ||
+  req.headers?.authorization?.replace("Bearer ", "");
+console.log("PRINTING TOKEN: ", token);
 		// If JWT is missing, return 401 Unauthorized response
 		if (!token) {
 			return res.status(401).json({ success: false, message: `Token Missing` });
 		}
+		console.log("RAW AUTH HEADER:", req.header("Authorization"))
+console.log("TOKEN USED FOR VERIFY:", token)
+console.log("JWT SECRET:", process.env.JWT_SECRET)
+
 
 		try {
 			// Verifying the JWT using the secret key stored in environment variables

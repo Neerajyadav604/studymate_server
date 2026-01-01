@@ -81,6 +81,7 @@ exports.categoryPageDetails = async (req, res) => {
       const categoriesExceptSelected = await Category.find({
         _id: { $ne: categoryId },
       })
+      console.log("CATEGORIES EXCEPT SELECTED", categoriesExceptSelected)
       let differentCategory = await Category.findOne(
         categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
           ._id
