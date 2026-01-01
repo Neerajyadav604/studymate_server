@@ -22,11 +22,16 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-	cors({
-		origin:"http://localhost:3000",
-		credentials:true,
-	})
-)
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://learning-managment-system-mu.vercel.app"
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
 
 app.use(
 	fileUpload({
